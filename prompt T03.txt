@@ -1,96 +1,56 @@
-//Amelia Renata Lumbanbatu - 12S24031
-//Prompt gemini 
+//Driver3.java dari gemini
 
- //yang permintaanmu
- package model;
+package driver;
 
-import java.util.ArrayList;
-import java.util.List;
+import model.JadwalLaundry;
+import java.util.Scanner;
 
-public class JadwalLaundry {
-    private String nama;
-    private String asrama;
-    private double berat;
-    private String hariAmbil;
-    private List<String> isiBag;
+public class Driver3 {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+        System.out.println("=== SISTEM LAUNDRY DEL ===");
+        System.out.print("Nama: "); String nama = sc.nextLine();
+        System.out.print("Asrama: "); String asrama = sc.nextLine();
+        System.out.print("Hari: "); String hari = sc.nextLine();
+        System.out.print("Berat (kg): "); double berat = sc.nextDouble();
 
-    public JadwalLaundry(String nama, String asrama, double berat, String hariAmbil) {
-        this.nama = nama;
-        this.asrama = asrama;
-        this.berat = berat;
-        this.hariAmbil = hariAmbil;
-        this.isiBag = new ArrayList<>();
-    }
-
-    public void tambahItem(String item) {
-        this.isiBag.add(item);
-    }
-
-    public String getEstimasiKembali() {
-        // Logika H+1 Sore sesuai permintaanmu
-        switch (hariAmbil.toLowerCase()) {
-            case "senin": return "Selasa Sore";
-            case "selasa": return "Rabu Sore";
-            case "rabu": return "Kamis Sore";
-            case "jumat": return "Sabtu Sore";
-            default: return "Tidak ada jadwal";
-        }
-    }
-
-    public void tampilkanDetail() {
-        System.out.println("\n--- DATA OPERASIONAL LAUNDRY DEL ---");
-        System.out.println("Nama Mahasiswa : " + nama);
-        System.out.println("Asrama         : " + asrama);
-        System.out.println("Berat          : " + berat + " kg " + (berat > 7 ? "(MELEBIHI KUOTA 7KG!)" : "(Aman)"));
-        System.out.println("Isi Bag        : " + isiBag);
-        System.out.println("Jadwal Kembali : " + getEstimasiKembali());
-        System.out.println("-------------------------------------");
-    }
+        JadwalLaundry laundry = new JadwalLaundry(nama, asrama, berat, hari);
+        laundry.tampilkanDetail();
+  }  
 }
 
-//yang kedua
+//JadwalLaundry.class dari gemini
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class JadwalLaundry {
-    private String nama;
-    private String asrama;
-    private double berat;
-    private String hariAmbil;
-    private List<String> isiBag;
+   private String nama;
+   private String asrama;
+   private String hari;
+   private double berat;
 
-    public JadwalLaundry(String nama, String asrama, double berat, String hariAmbil) {
-        this.nama = nama;
-        this.asrama = asrama;
-        this.berat = berat;
-        this.hariAmbil = hariAmbil;
-        this.isiBag = new ArrayList<>();
-    }
+   public JadwalLaundry(String var1, String var2, double var3, String var5) {
+      this.nama = var1;
+      this.asrama = var2;
+      this.berat = var3;
+      this.hari = var5;
+   }
 
-    public void tambahItem(String item) {
-        this.isiBag.add(item);
-    }
+   public String getKembali() {
+      if (this.hari.equalsIgnoreCase("senin")) {
+         return "Selasa Sore";
+      } else if (this.hari.equalsIgnoreCase("selasa")) {
+         return "Rabu Sore";
+      } else if (this.hari.equalsIgnoreCase("rabu")) {
+         return "Kamis Sore";
+      } else {
+         return this.hari.equalsIgnoreCase("jumat") ? "Sabtu Sore" : "Jadwal Tidak Ada";
+      }
+   }
 
-    public String getEstimasiKembali() {
-        // Logika H+1 Sore sesuai permintaanmu
-        switch (hariAmbil.toLowerCase()) {
-            case "senin": return "Selasa Sore";
-            case "selasa": return "Rabu Sore";
-            case "rabu": return "Kamis Sore";
-            case "jumat": return "Sabtu Sore";
-            default: return "Tidak ada jadwal";
-        }
-    }
-
-    public void tampilkanDetail() {
-        System.out.println("\n--- DATA OPERASIONAL LAUNDRY DEL ---");
-        System.out.println("Nama Mahasiswa : " + nama);
-        System.out.println("Asrama         : " + asrama);
-        System.out.println("Berat          : " + berat + " kg " + (berat > 7 ? "(MELEBIHI KUOTA 7KG!)" : "(Aman)"));
-        System.out.println("Isi Bag        : " + isiBag);
-        System.out.println("Jadwal Kembali : " + getEstimasiKembali());
-        System.out.println("-------------------------------------");
-    }
+   public void tampilkanDetail() {
+      System.out.println("\n--- Hasil ---");
+      System.out.println("Mahasiswa: " + this.nama + " (" + this.asrama + ")");
+      System.out.println("Kembali: " + this.getKembali());
+   }
 }
